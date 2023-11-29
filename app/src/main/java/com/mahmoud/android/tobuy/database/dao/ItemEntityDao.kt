@@ -9,7 +9,7 @@ import com.mahmoud.android.tobuy.database.entity.ItemEntity
 @Dao
 interface ItemEntityDao {
     @Query("SELECT * FROM item_entity")
-    fun getAllItemEntities(): List<ItemEntity>
+    suspend fun getAllItemEntities(): List<ItemEntity>
 
     @Insert
     fun insert(itemEntity: ItemEntity)
