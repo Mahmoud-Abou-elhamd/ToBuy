@@ -38,7 +38,7 @@ class HomeFragment : BaseFragment(), ItemEntityInterface {
     }
 
     override fun onDeleteItemEntity(itemEntity: ItemEntity) {
-
+        sharedViewModel.deleteItem(itemEntity)
     }
 
     override fun onBumpPriority(itemEntity: ItemEntity) {
