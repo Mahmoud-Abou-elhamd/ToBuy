@@ -11,6 +11,7 @@ class ToBuyViewModel : ViewModel() {
     private lateinit var repository: ToBuyRepository
 
     val itemEntitiesLiveData = MutableLiveData<List<ItemEntity>>()
+    val transactionCompleteLiveData = MutableLiveData<Boolean>()
 
     fun init(appDatabase: AppDatabase) {
         repository = ToBuyRepository(appDatabase)
@@ -25,6 +26,7 @@ class ToBuyViewModel : ViewModel() {
     fun insertItem(itemEntity: ItemEntity) {
         viewModelScope.launch {
             repository.insertItem(itemEntity)
+            transactionCompleteLiveData.postValue(true)
         }
     }
 
