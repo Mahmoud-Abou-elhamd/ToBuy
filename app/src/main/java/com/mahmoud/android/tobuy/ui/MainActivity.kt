@@ -1,9 +1,11 @@
 package com.mahmoud.android.tobuy.ui
 
 import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethod.SHOW_FORCED
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -51,6 +53,6 @@ class MainActivity : AppCompatActivity() {
     fun showKeyboard() {
         val imm: InputMethodManager =
             application.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+        imm.toggleSoftInput(SHOW_FORCED, 0)
     }
 }
