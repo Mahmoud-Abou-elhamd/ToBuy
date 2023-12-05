@@ -16,4 +16,8 @@ class ToBuyRepository(
     }
 
     fun getAllItemEntities(): Flow<List<ItemEntity>> = appDatabase.itemEntityDao().getAllItemEntities()
+
+    suspend fun updateItem(itemEntity: ItemEntity){
+        appDatabase.itemEntityDao().update(itemEntity)
+    }
 }
