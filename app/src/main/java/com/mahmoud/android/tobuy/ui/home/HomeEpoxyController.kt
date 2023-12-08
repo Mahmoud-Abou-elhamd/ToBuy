@@ -1,5 +1,6 @@
 package com.mahmoud.android.tobuy.ui.home
 
+import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -87,7 +88,13 @@ class HomeEpoxyController(
                 else -> R.color.blue_gray_700
             }
 
-            priorityTextView.setBackgroundColor(ContextCompat.getColor(root.context, colorRes))
+            val color = ContextCompat.getColor(root.context, colorRes)
+            priorityTextView.setBackgroundColor(color)
+            root.setStrokeColor(ColorStateList.valueOf(color))
+
+            root.setOnClickListener {
+                itemEntityInterface.onItemSelected(itemEntity)
+            }
         }
 
     }
