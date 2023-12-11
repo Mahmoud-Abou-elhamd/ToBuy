@@ -8,6 +8,8 @@ import android.view.View
 import android.view.inputmethod.InputMethod.SHOW_FORCED
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -40,10 +42,17 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.profileFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
-        setupWithNavController(
-            findViewById<BottomNavigationView>(R.id.bottomNavigation),
-            navHostFragment.navController
-        )
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        setupWithNavController(bottomNavigationView, navController)
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            if (appBarConfiguration.topLevelDestinations.contains(destination.id)) {
+                bottomNavigationView.isVisible = true
+            } else {
+                bottomNavigationView.isGone = true
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
