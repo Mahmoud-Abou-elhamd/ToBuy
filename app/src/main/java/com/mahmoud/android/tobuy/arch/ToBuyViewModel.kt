@@ -12,7 +12,7 @@ class ToBuyViewModel : ViewModel() {
     private lateinit var repository: ToBuyRepository
 
     val itemEntitiesLiveData = MutableLiveData<List<ItemEntity>>()
-    val transactionCompleteLiveData = MutableLiveData<Boolean>()
+    val transactionCompleteLiveData = MutableLiveData<Event<Boolean>>()
 
     val categoryEntitiesLiveData = MutableLiveData<List<CategoryEntity>>()
 
@@ -36,7 +36,7 @@ class ToBuyViewModel : ViewModel() {
     fun insertItem(itemEntity: ItemEntity) {
         viewModelScope.launch {
             repository.insertItem(itemEntity)
-            transactionCompleteLiveData.postValue(true)
+            transactionCompleteLiveData.postValue(Event(true))
         }
     }
     fun deleteItem(itemEntity: ItemEntity) {
@@ -47,7 +47,7 @@ class ToBuyViewModel : ViewModel() {
     fun updateItem(itemEntity: ItemEntity) {
         viewModelScope.launch {
             repository.updateItem(itemEntity)
-            transactionCompleteLiveData.postValue(true)
+            transactionCompleteLiveData.postValue(Event(true))
         }
     }
     // endregion ItemEntity
@@ -57,7 +57,7 @@ class ToBuyViewModel : ViewModel() {
         viewModelScope.launch {
             repository.insertCategory(categoryEntity)
 
-            transactionCompleteLiveData.postValue(true)
+            transactionCompleteLiveData.postValue(Event(true))
         }
     }
 
@@ -71,7 +71,7 @@ class ToBuyViewModel : ViewModel() {
         viewModelScope.launch {
             repository.updateCategory(categoryEntity)
 
-            transactionCompleteLiveData.postValue(true)
+            transactionCompleteLiveData.postValue(Event(true))
         }
     }
     // endregion CategoryEntity
