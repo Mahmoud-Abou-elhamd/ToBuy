@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.mahmoud.android.tobuy.database.AppDatabase
 import com.mahmoud.android.tobuy.database.entity.CategoryEntity
 import com.mahmoud.android.tobuy.database.entity.ItemEntity
+import com.mahmoud.android.tobuy.database.entity.ItemWithCategoryEntity
 import kotlinx.coroutines.launch
 
 class ToBuyViewModel : ViewModel() {
@@ -13,6 +14,8 @@ class ToBuyViewModel : ViewModel() {
 
     val itemEntitiesLiveData = MutableLiveData<List<ItemEntity>>()
     val transactionCompleteLiveData = MutableLiveData<Event<Boolean>>()
+
+    val itemWithCategoryEntitiesLiveData = MutableLiveData<List<ItemWithCategoryEntity>>()
 
     val categoryEntitiesLiveData = MutableLiveData<List<CategoryEntity>>()
 
@@ -22,6 +25,12 @@ class ToBuyViewModel : ViewModel() {
         viewModelScope.launch {
             repository.getAllItems().collect { items ->
                 itemEntitiesLiveData.postValue(items)
+            }
+        }
+
+        viewModelScope.launch {
+            repository.getAllItemWithCategoryEntities().collect { items ->
+                itemWithCategoryEntitiesLiveData.postValue(items)
             }
         }
 
