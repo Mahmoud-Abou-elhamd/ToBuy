@@ -1,5 +1,6 @@
 package com.mahmoud.android.tobuy.arch
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,6 +19,10 @@ class ToBuyViewModel : ViewModel() {
     val itemWithCategoryEntitiesLiveData = MutableLiveData<List<ItemWithCategoryEntity>>()
 
     val categoryEntitiesLiveData = MutableLiveData<List<CategoryEntity>>()
+
+    private val _categoriesViewStateLiveData = MutableLiveData<CategoriesViewState>()
+    val categoriesViewStateLiveData: LiveData<CategoriesViewState>
+        get() = _categoriesViewStateLiveData
 
     fun init(appDatabase: AppDatabase) {
         repository = ToBuyRepository(appDatabase)
@@ -39,6 +44,33 @@ class ToBuyViewModel : ViewModel() {
                 categoryEntitiesLiveData.postValue(categories)
             }
         }
+    }
+
+    fun onCategorySelected(categoryId: String) {
+        val loadingViewState = CategoriesViewState(isLoading = true)
+        _categoriesViewStateLiveData.value = loadingViewState
+
+        val categories = categoryEntitiesLiveData.value ?: return
+        val viewStateItemList = ArrayList<CategoriesViewState.Item>()
+        categories.forEach {
+            viewStateItemList.add(CategoriesViewState.Item(
+                categoryEntity = it,
+                isSelected = it.id == categoryId
+            ))
+        }
+
+        val viewState = CategoriesViewState(itemList = viewStateItemList)
+        _categoriesViewStateLiveData.postValue(viewState)
+    }
+
+    data class CategoriesViewState(
+        val isLoading: Boolean = false,
+        val itemList: List<Item> = emptyList()
+    ) {
+        data class Item(
+            val categoryEntity: CategoryEntity = CategoryEntity(),
+            val isSelected: Boolean = false
+        )
     }
 
     // region ItemEntity
