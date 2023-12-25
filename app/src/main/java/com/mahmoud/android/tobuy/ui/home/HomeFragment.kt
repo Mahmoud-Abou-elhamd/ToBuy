@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.setPadding
 import com.airbnb.epoxy.EpoxyTouchHelper
 import com.mahmoud.android.tobuy.R
 import com.mahmoud.android.tobuy.database.entity.ItemEntity
@@ -35,6 +36,9 @@ class HomeFragment : BaseFragment(), ItemEntityInterface {
 
         sharedViewModel.itemWithCategoryEntitiesLiveData.observe(viewLifecycleOwner){ items ->
             controller.items = items
+            if(items.isEmpty()){
+                binding.epoxyRecyclerView.setPadding(0)
+            }
         }
 
         EpoxyTouchHelper.initSwiping(binding.epoxyRecyclerView)

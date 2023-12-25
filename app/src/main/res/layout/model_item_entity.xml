@@ -27,6 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/descriptionTextView"
             app:layout_constraintEnd_toStartOf="@id/priorityTextView"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:text="Title here"/>
         
         <androidx.appcompat.widget.AppCompatTextView
@@ -37,10 +38,22 @@
             app:layout_constraintTop_toBottomOf="@id/titleTextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/titleTextView"
-            app:layout_constraintEnd_toStartOf="@id/priorityTextView"
+            app:layout_constraintEnd_toStartOf="@id/categoryNameTextView"
             android:textColor="?attr/colorOnSurface"
             android:textStyle="italic"
             tools:text="Description will go here if we have it"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/categoryNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="?attr/colorOnBackground"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/priorityTextView"
+            tools:text="Amazon" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/priorityTextView"
@@ -54,7 +67,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:background="@color/blue_gray_700"/>
+            tools:background="@color/gray_700"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

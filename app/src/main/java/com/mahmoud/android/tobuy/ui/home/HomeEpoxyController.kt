@@ -96,6 +96,8 @@ class HomeEpoxyController(
             root.setOnClickListener {
                 itemEntityInterface.onItemSelected(itemEntity.itemEntity)
             }
+
+            categoryNameTextView.text = itemEntity.categoryEntity?.name
         }
 
     }
