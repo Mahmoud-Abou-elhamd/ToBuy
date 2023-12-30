@@ -1,19 +1,23 @@
 package com.mahmoud.android.tobuy.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.setPadding
 import com.airbnb.epoxy.EpoxyTouchHelper
 import com.mahmoud.android.tobuy.R
 import com.mahmoud.android.tobuy.database.entity.ItemEntity
 import com.mahmoud.android.tobuy.databinding.FragmentHomeBinding
 import com.mahmoud.android.tobuy.ui.BaseFragment
+import com.mahmoud.android.tobuy.ui.bottomsheet.SortOrderBottomSheetDialogFragment
 
 class HomeFragment : BaseFragment(), ItemEntityInterface {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,9 +40,6 @@ class HomeFragment : BaseFragment(), ItemEntityInterface {
 
         sharedViewModel.homeViewStateLiveData.observe(viewLifecycleOwner){ viewState ->
             controller.viewState = viewState
-            if(viewState.dataList.isEmpty()){
-                binding.epoxyRecyclerView.setPadding(0)
-            }
         }
 
         EpoxyTouchHelper.initSwiping(binding.epoxyRecyclerView)
@@ -57,6 +58,19 @@ class HomeFragment : BaseFragment(), ItemEntityInterface {
                 }
 
             })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_home_fragment, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.menuItemSort) {
+            SortOrderBottomSheetDialogFragment().show(childFragmentManager, null)
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onResume() {
