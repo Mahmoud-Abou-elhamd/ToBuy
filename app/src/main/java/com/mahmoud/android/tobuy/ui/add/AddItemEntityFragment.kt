@@ -81,16 +81,13 @@ class AddItemEntityFragment : BaseFragment() {
 
                 Toast.makeText(requireActivity(), "Item saved!", Toast.LENGTH_SHORT).show()
                 binding.titleEditText.text = null
-                mainActivity.showKeyboard()
                 binding.titleEditText.requestFocus()
 
                 binding.descriptionEditText.text = null
                 binding.radioGroup.check(R.id.radioButtonLow)
+                binding.quantitySeekBar.progress = 1
             }
         }
-
-        mainActivity.showKeyboard()
-        binding.titleEditText.requestFocus()
 
         selectedItemEntity?.let { itemEntity ->
             isInEditMode = true
