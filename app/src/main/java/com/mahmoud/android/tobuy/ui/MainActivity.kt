@@ -21,6 +21,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mahmoud.android.tobuy.R
+import com.mahmoud.android.tobuy.SharedPrefUtil
 import com.mahmoud.android.tobuy.arch.ToBuyViewModel
 import com.mahmoud.android.tobuy.database.AppDatabase
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        SharedPrefUtil.init(this)
 
         val viewModel: ToBuyViewModel by viewModels()
         viewModel.init(AppDatabase.getDatabase(this))
