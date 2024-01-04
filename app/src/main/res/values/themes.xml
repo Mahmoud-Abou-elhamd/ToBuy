@@ -17,4 +17,10 @@
         <item name="colorSurface">@color/white</item>
         <item name="colorOnSurface">@color/gray_900</item>
     </style>
+    
+    <style name="Theme.ToBuy.SplashScreen" parent="Theme.SplashScreen.IconBackground">
+        <item name="postSplashScreenTheme">@style/Theme.ToBuy</item>
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_adaptive_fore</item>
+    </style>
 </resources>
