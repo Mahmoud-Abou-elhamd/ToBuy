@@ -10,7 +10,7 @@ import com.mahmoud.android.tobuy.database.entity.CategoryEntity
 import com.mahmoud.android.tobuy.databinding.FragmentProfileBinding
 import com.mahmoud.android.tobuy.ui.BaseFragment
 
-class CustomizationFragment : BaseFragment(), CategoryEntityInterface  {
+class CustomizationFragment : BaseFragment(), CustomizationInterface  {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -50,6 +50,12 @@ class CustomizationFragment : BaseFragment(), CategoryEntityInterface  {
 
     override fun onCategorySelected(categoryEntity: CategoryEntity) {
         Log.i("ProfileFragment", categoryEntity.toString())
+    }
+
+    override fun onPrioritySelected(priorityName: String) {
+        navigateViaNavGraph(CustomizationFragmentDirections
+            .actionCustomizationFragmentToCustomColorFragment(priorityName)
+        )
     }
 
     override fun onDestroyView() {

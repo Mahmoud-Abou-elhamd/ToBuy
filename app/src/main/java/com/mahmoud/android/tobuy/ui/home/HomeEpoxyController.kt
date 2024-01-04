@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyController
 import com.dmp.tobuy.ui.epoxy.ViewBindingKotlinModel
 import com.mahmoud.android.tobuy.R
+import com.mahmoud.android.tobuy.SharedPrefUtil
 import com.mahmoud.android.tobuy.addHeaderModel
 import com.mahmoud.android.tobuy.arch.ToBuyViewModel
 import com.mahmoud.android.tobuy.database.entity.ItemEntity
@@ -67,14 +68,13 @@ class HomeEpoxyController(
                 itemEntityInterface.onBumpPriority(itemEntity.itemEntity)
             }
 
-            val colorRes = when(itemEntity.itemEntity.priority){
-                1 -> android.R.color.holo_green_dark
-                2 -> android.R.color.holo_orange_dark
-                3 -> android.R.color.holo_red_dark
+            val color = when (itemEntity.itemEntity.priority) {
+                1 -> SharedPrefUtil.getLowPriorityColor()
+                2 -> SharedPrefUtil.getMediumPriorityColor()
+                3 -> SharedPrefUtil.getHighPriorityColor()
                 else -> R.color.gray_700
             }
 
-            val color = ContextCompat.getColor(root.context, colorRes)
             priorityTextView.setBackgroundColor(color)
             root.setStrokeColor(ColorStateList.valueOf(color))
 

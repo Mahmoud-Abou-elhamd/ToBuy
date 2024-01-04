@@ -1,13 +1,11 @@
 package com.mahmoud.android.tobuy.ui.add
 
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.navArgs
 import com.mahmoud.android.tobuy.R
 import com.mahmoud.android.tobuy.database.entity.CategoryEntity
